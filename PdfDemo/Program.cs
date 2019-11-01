@@ -24,6 +24,7 @@ namespace PdfDemo
     internal class Program
     {
         /**
+         * 将字体文件放入bin目录下  或者 更改获取字体的url
          * 生成pdf文件（文本直接根据xy坐标放在可以放的位置）
          * 1.引nuget包 itextsharp
          * 2.创建 Document  / 文件
