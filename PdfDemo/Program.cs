@@ -72,22 +72,23 @@ namespace PdfDemo
                 content = "一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十";
                 AddParagraph(document, content, font, 0);
 
-
                 /**
                  *将html 富文本转pdf文件。
                  * 1.引入nuget包  itextsharp.xmlworker
                  * 2.创建类实现FontFactoryImp接口
+                 * 一般富文本都为协议质量可以选择将pdf更新为新的一页
                  */
-                var html = "xxxxx";
-                byte[] data = Encoding.UTF8.GetBytes(html);
-                var msInput = new MemoryStream(data);
+                document.NewPage();
+                var text = File.ReadAllText(@"../../html.html");
+                var html = text;
+                var htmlStream = new MemoryStream(Encoding.UTF8.GetBytes(html));
                 var pdfDest = new PdfDestination(PdfDestination.XYZ, 50, document.PageSize.Height, 1f);
 
                 // UnicodeFontFactory 实现FontFactoryImp接口的实现类
                 XMLWorkerHelper.GetInstance().ParseXHtml(
                     writer,
                     document,
-                    msInput,
+                    htmlStream,
                     null,
                     Encoding.UTF8,
                     new UnicodeFontFactory());
@@ -216,7 +217,7 @@ namespace PdfDemo
                 BaseColor color,
                 bool cached)
             {
-                BaseFont baseFont = BaseFont.CreateFont(AppDomain.CurrentDomain.BaseDirectory + "Fonts\\simhei.TTF", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED); // 黑体
+                BaseFont baseFont = BaseFont.CreateFont(AppDomain.CurrentDomain.BaseDirectory + "simhei.TTF", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED); // 黑体
                 return new Font(baseFont, size, style, color);
             }
         }

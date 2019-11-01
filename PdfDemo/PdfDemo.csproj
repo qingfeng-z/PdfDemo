@@ -58,6 +58,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="simhei.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
